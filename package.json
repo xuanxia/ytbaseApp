@@ -3,21 +3,31 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "ios": "react-native run-ios",
+    "android": "react-native run-android",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
   "dependencies": {
     "react": "16.0.0-alpha.6",
     "react-native": "0.43.4",
+    "react-native-device-info": "^0.10.2",
+    "react-native-fs": "^2.1.0-rc.1",
+    "react-native-scrollable-tab-view": "^0.6.5",
+    "react-native-sglistview": "^0.3.10",
+    "react-native-vector-icons": "^4.0.1",
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
+    "redux-immutablejs": "0.0.8",
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",
     "babel-preset-react-native": "1.9.1",
     "jest": "19.0.2",
-    "react-test-renderer": "16.0.0-alpha.6"
+    "react-test-renderer": "16.0.0-alpha.6",
+    "remote-redux-devtools": "^0.5.7",
+    "remote-redux-devtools-on-debugger": "^0.7.0"
   },
   "jest": {
     "preset": "react-native"
