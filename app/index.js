@@ -17,37 +17,37 @@ import {
     Text,
     FlatList
 } from 'react-native';
-import {connectComponent,connectStore ,navigationBarCt} from './base/utils';
+import {connectComponent,connectStore} from './base/utils';
+import {PageList} from './base/components';
 
 class HipacApp extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            list:[]
-        }
+        this.pageListConfig = {
+            data: [
+                {text: '资质信息',onPress:()=>{},rightTemp:(<Text style={{color:'#666'}}>11111</Text>)},
+                {text: '关于海拍客', onPress: ()=>{}},
+                {text: '退出当前账号', onPress: ()=>{},}
+            ]
+        };
     }
-    goDetail(item){
 
-    }
-   async  componentWillMount(){
-     const list = await  this.props.actions.doTopicsList({
-            page:1,
-            limit:10
-        });
-        this.setState({
-            list:list.data
-        })
-    }
+   componentWillMount() {
+   }
     render(){
 
         return (
-            <View>
-                <FlatList
-                    data={this.state.list}
-                    renderItem={({item}) => <Text style={{height:30}} onPress={this.goDetail.bind(this,item)}>{item.title}</Text>}
-                />
+            <View style={styles.container}>
+                <PageList {...this.pageListConfig}/>
             </View>
         );
     }
 }
 export  default connectComponent(HipacApp)
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#f5f5f5',
+        paddingTop:20
+    },
+});

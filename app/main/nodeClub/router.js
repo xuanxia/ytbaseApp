@@ -1,9 +1,12 @@
 /**
  * Created by kangxiaojian on 2017/4/26.
  */
-
-const routers = {
+import NodeClubLogin from './container/user/login';
+import ContentPage from './container/content/content';
+const routes = {
     //登录页
-    NodeClubLogin:{component: require('./container/user/login')}
+    NodeClubLogin:{screen: NodeClubLogin},
+    //内容页
+    ContentPage:{screen:ContentPage}
 };
-export default routers;
+export default routes;

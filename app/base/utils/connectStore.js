@@ -6,10 +6,10 @@ class ContentStore{
     _middlewares = [];
     _reducers = {};
     _actions= {};
-    _routers = {};
+    _routes = {};
     _actionTypes = {};
-    set routers(routers){
-        this._routers = Object.assign(this._routers,routers);
+    set routes(routes){
+        this._routes = Object.assign(this._routes,routes);
     }
     set reducers(reducers){
         this._reducers = Object.assign(this._reducers,reducers);
@@ -24,8 +24,8 @@ class ContentStore{
         this._actionTypes = Object.assign(this._actionTypes,actionTypes);
     }
 
-    get routers(){
-        return this._routers;
+    get routes(){
+        return this._routes;
     }
     get middlewares(){
         return this._middlewares;
