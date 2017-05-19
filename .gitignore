@@ -1,6 +1,7 @@
 # OSX
 #
 .DS_Store
+npm-debug.log
 
 # Xcode
 #
@@ -22,32 +23,66 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 
-# Android/IntelliJ
+# Android/IJ
 #
-build/
-.idea
+*.iml
+*.idea
 .gradle
 local.properties
-*.iml
 
 # node.js
 #
 node_modules/
-npm-debug.log
-yarn-error.log
+
 
 # BUCK
 buck-out/
 \.buckd/
-*.keystore
+android/app/libs
+android/keystores/debug.keystore
 
-# fastlane
-#
-# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
-# screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Gitignore.md
+android/bundle
+android/app/build/
+android/app/src/main/res/drawable-hdpi
+android/app/src/main/res/drawable-mdpi
+android/app/src/main/res/drawable-xhdpi
+android/app/src/main/res/drawable-xxhdpi
+android/app/src/main/res/drawable-xxxhdpi
 
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots
+android/app/src/main/assets/
+
+
+.idea/
+
+src/**/*.css
+
+ios/AFNetworking/AFNetworkReachabilityManager.m
+ios/AFNetworking/AFSecurityPolicy.h
+ios/AFNetworking/AFSecurityPolicy.m
+ios/AFNetworking/AFURLRequestSerialization.h
+ios/AFNetworking/AFURLRequestSerialization.m
+ios/AFNetworking/AFURLResponseSerialization.h
+ios/AFNetworking/AFURLResponseSerialization.m
+ios/AFNetworking/AFURLSessionManager.h
+ios/AFNetworking/AFURLSessionManager.m
+ios/bundle/assets/src/main/
+ios/bundle/assets/src/run/
+ios/bundle/assets/src/widget/
+ios/bundle/main.jsbundle
+ios/bundle/main.jsbundle.meta
+android/app/src/main/assets/fonts/Ionicons.ttf
+android/app/src/main/assets/fonts/MaterialCommunityIcons.ttf
+android/app/src/main/assets/fonts/MaterialIcons.ttf
+android/app/src/main/assets/fonts/Octicons.ttf
+android/app/src/main/assets/fonts/SimpleLineIcons.ttf
+android/app/src/main/assets/fonts/Zocial.ttf
+android/app/src/main/assets/fonts/iconfont.ttf
+Would skip repository fontBuild/fonttools/
+ios/ytmallApp 2017-05-18 11-08-29/
+ios/ytmallApp 2017-05-18 15-18-53/
+ios/ytmallApp 2017-05-18 16-00-09/
+ios/ytmallApp 2017-05-18 16-44-07/
+ios/ytmallApp 2017-05-18 16-53-32/
+ios/ytmallApp 2017-05-19 10-01-18/
+
+fontBuild/fonttools/
