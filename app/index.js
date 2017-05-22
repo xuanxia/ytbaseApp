@@ -25,9 +25,9 @@ class HipacApp extends Component {
         super(props);
         this.pageListConfig = {
             data: [
-                {text: '资质信息',onPress:()=>{},rightTemp:(<Text style={{color:'#666'}}>11111</Text>)},
-                {text: '关于海拍客', onPress: ()=>{}},
-                {text: '退出当前账号', onPress: ()=>{},}
+                {text: 'test1',onPress:()=>{},rightTemp:(<Text style={{color:'#666'}}>11111</Text>)},
+                {text: 'test2', onPress: ()=>{}},
+                {text: 'test3', onPress: ()=>{},}
             ]
         };
     }

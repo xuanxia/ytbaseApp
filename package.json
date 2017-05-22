@@ -12,10 +12,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "prop-types": "^15.5.10",
     "react": "16.0.0-alpha.6",
     "react-native": "0.43.4",
     "react-native-device-info": "^0.10.2",
     "react-native-fs": "^2.1.0-rc.1",
+    "react-native-root-toast": "^1.1.2",
     "react-native-scrollable-tab-view": "^0.6.5",
     "react-native-sglistview": "^0.3.10",
     "react-native-vector-icons": "^4.1.1",

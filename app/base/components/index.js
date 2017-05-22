@@ -3,7 +3,13 @@
  */
 import FontIcon from './font/FontIcon';
 import PageList from './page/PageList';
+import Toast from './toast/Toast';
+import Input from './form/Input';
+import FormList from './form/FormList';
 export {
     FontIcon,
-    PageList
+    PageList,
+    Toast,
+    Input,
+    FormList
 }
