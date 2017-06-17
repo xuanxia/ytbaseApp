@@ -1,6 +1,3 @@
-/**
- * Created by kangdaye on 16/7/20.
- */
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import connectStore from './connectStore';

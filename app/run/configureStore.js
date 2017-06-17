@@ -8,7 +8,7 @@ import { connectStore } from '../base/utils';
 import * as reducers from './reducers'
 import * as actions from './actions';
 import * as actionTypes from './actions/actionTypes';
-import nodeClubConfigureStore from '../main/nodeClub/configureStore';
+import nodeClubConfigureStore from '../main/demo/configureStore';
 export default (initialState)=>{
     nodeClubConfigureStore();
     connectStore.middlewares = [thunkMiddleware,promiseMiddleware,isLoginMiddleware];

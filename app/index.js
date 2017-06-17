@@ -1,53 +1,65 @@
 /**
  * Created by kangxiaojian on 2017/4/26.
  */
-import React,{Component} from 'react';
+import React, {Component } from 'react';
 import {
-    Navigator,
-    View,
     StyleSheet,
-    Platform,
-    DeviceEventEmitter,
-    TouchableOpacity,
-    AsyncStorage,
-    BackAndroid,
-    Linking,
-    NativeModules,
-    InteractionManager,
     Text,
-    FlatList
+    View,
+    AppRegistry
 } from 'react-native';
-import {connectComponent,connectStore} from './base/utils';
-import {PageList} from './base/components';
+import connectComponent from './base/utils/connect'
+import { StackNavigator,TabNavigator } from 'react-navigation';
+import routes from './main/demo/router';
 
-class HipacApp extends Component {
-    constructor(props){
-        super(props);
-        this.pageListConfig = {
-            data: [
-                {text: 'test1',onPress:()=>{},rightTemp:(<Text style={{color:'#666'}}>11111</Text>)},
-                {text: 'test2', onPress: ()=>{}},
-                {text: 'test3', onPress: ()=>{},}
-            ]
-        };
+
+const IndexNavigator = StackNavigator(routes,{
+    initialRouteName:'MainIndex',
+});
+const LoginNavigator = StackNavigator(routes,{
+    initialRouteName:'NodeClubLogin',
+    navigationOptions:{
+        header:null
     }
+});
 
-   componentWillMount() {
-   }
-    render(){
+class IndexScreen extends React.Component {
+    render() {
+        return <IndexNavigator/>
+    }
+}
 
+class LoginScreen extends React.Component {
+    render() {
+        return <LoginNavigator/>
+    }
+}
+
+const AppTabNavigator = TabNavigator({
+    index: { screen: IndexScreen },
+    login: { screen: LoginScreen },
+},{
+    tabBarPosition:"bottom",
+    swipeEnabled:true,
+    animationEnabled:true,
+    initialRouteName:"index",
+    tabBarOptions:{
+        activeTintColor: '#e91e63',
+        labelStyle: {
+            fontSize: 12,
+        },
+        style: {
+        },
+    }
+});
+class App extends Component {
+    render() {
         return (
-            <View style={styles.container}>
-                <PageList {...this.pageListConfig}/>
-            </View>
+            <AppTabNavigator></AppTabNavigator>
         );
     }
 }
-export  default connectComponent(HipacApp)
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#f5f5f5',
-        paddingTop:20
-    },
-});
+export  default connectComponent(App);
+
+
+

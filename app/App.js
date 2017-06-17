@@ -10,14 +10,14 @@ import {
     AppRegistry
 } from 'react-native';
 import {Provider} from 'react-redux';
-import HipacApp from './index';
+import DemoApp from './';
 import configureStore from './run/configureStore';
 const store = configureStore();
 class App extends Component{
     render(){
         return(
             <Provider store={store}>
-                <HipacApp />
+                <DemoApp />
             </Provider>
             )
     }
