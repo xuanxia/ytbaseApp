@@ -13,35 +13,14 @@ import { StackNavigator,TabNavigator } from 'react-navigation';
 import routes from './main/demo/router';
 
 
-const IndexNavigator = StackNavigator(routes,{
-    initialRouteName:'MainIndex',
-});
-const LoginNavigator = StackNavigator(routes,{
-    initialRouteName:'NodeClubLogin',
-    navigationOptions:{
-        header:null
-    }
-});
-
-class IndexScreen extends React.Component {
-    render() {
-        return <IndexNavigator/>
-    }
-}
-
-class LoginScreen extends React.Component {
-    render() {
-        return <LoginNavigator/>
-    }
-}
 
 const AppTabNavigator = TabNavigator({
-    index: { screen: IndexScreen },
-    login: { screen: LoginScreen },
+    index: { screen: routes.MainIndex.screen },
+    login: { screen: routes.NodeClubLogin.screen},
 },{
     tabBarPosition:"bottom",
     swipeEnabled:true,
-    animationEnabled:true,
+   // animationEnabled:true,
     initialRouteName:"index",
     tabBarOptions:{
         activeTintColor: '#e91e63',
@@ -52,10 +31,13 @@ const AppTabNavigator = TabNavigator({
         },
     }
 });
+const IndexNavigator = StackNavigator(Object.assign({},{index:{
+    screen:AppTabNavigator
+}},routes));
 class App extends Component {
     render() {
         return (
-            <AppTabNavigator></AppTabNavigator>
+            <IndexNavigator></IndexNavigator>
         );
     }
 }
