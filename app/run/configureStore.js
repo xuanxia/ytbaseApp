@@ -8,9 +8,9 @@ import { connectStore } from '../base/utils';
 import * as reducers from './reducers'
 import * as actions from './actions';
 import * as actionTypes from './actions/actionTypes';
-import nodeClubConfigureStore from '../main/demo/configureStore';
+import wechatConfigureStore from '../main/wechat/configureStore';
 export default (initialState)=>{
-    nodeClubConfigureStore();
+    wechatConfigureStore();
     connectStore.middlewares = [thunkMiddleware,promiseMiddleware,isLoginMiddleware];
     connectStore.reducers = reducers;
     connectStore.actions = actions;

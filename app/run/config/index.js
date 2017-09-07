@@ -20,7 +20,7 @@ const httpDomain = {
 
     },
     test: {
-        dataServer:'https://cnodejs.org/api/v1'
+        dataServer:'http://127.0.0.1:7001'
     }
 };
 

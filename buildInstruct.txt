@@ -1,0 +1,13 @@
+// 清理项目
+
+xcodebuild clean -project ytbaseApp.xcodeproj  -configuration "Release" -alltargets
+
+// ARCHIVE
+xcodebuild archive -project ytbaseApp.xcodeproj \
+                   -scheme "ytbaseApp" \
+                   -destination generic/platform=iOS \
+                   -archivePath ~/Desktop/ytbaseApp.xcarchive
+//EXPORT IPA
+xcodebuild -exportArchive -archivePath ~/Desktop/ytbaseApp.xcarchive \
+                          -exportPath  ~/Desktop \
+                         -exportOptionsPlist ./ytbaseApp/Info.plist

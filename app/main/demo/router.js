@@ -10,7 +10,7 @@ const routes = {
     //列表首页
     MainIndex:{screen:connectScreen(MainIndex)},
     //登录页
-    NodeClubLogin:{screen: connectScreen(NodeClubLogin,{actions:['doNodeClubLogin'],storeRcs:['loginRcs']})},
+    NodeClubLogin:{screen: connectScreen(NodeClubLogin,{actions:['doLogin'],storeRcs:['loginRcs']})},
     //内容页
     ContentPage:{screen:connectScreen(ContentPage)},
     //轮播图

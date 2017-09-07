@@ -19,4 +19,4 @@ Input.defaultProps = {
     placeholder: "",
     underlineColorAndroid: "transparent",
     returnKeyType: "next"
-}
+};

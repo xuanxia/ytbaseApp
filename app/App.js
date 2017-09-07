@@ -10,7 +10,7 @@ import {
     AppRegistry
 } from 'react-native';
 import {Provider} from 'react-redux';
-import DemoApp from './';
+import DemoApp from './index';
 import configureStore from './run/configureStore';
 const store = configureStore();
 class App extends Component{
