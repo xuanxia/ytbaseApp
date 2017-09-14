@@ -28,12 +28,15 @@ export default class LoginScreen extends Component {
         if(res && res.data &&res.data.id){
             //保存用户信息到本地
             AsyncStorage.setItem('USER-INFO',JSON.stringify(res.data));
-            AsyncStorage.setItem('TOKEN',JSON.stringify(res.data.id));
+            AsyncStorage.setItem('TOKEN',res.data.id);
            this.props.navigation.navigate('Home');
         }
      }
     doGoRegister(){
         this.props.navigation.navigate('Register');
+    }
+    componentWillMount(){
+        AsyncStorage.setItem('TOKEN','');
     }
     render() {
         return (

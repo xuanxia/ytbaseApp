@@ -24,23 +24,19 @@ import {
 var { width, height} = Dimensions.get('window');
 
 export default class NewFriendsScreen extends Component {
+    constructor(props){
+        super(props);
+
+    }
     render() {
-        let listData = [];
-        for (let i = 0; i < 30; i++) {
-            listData.push({
-                key: i,
-                title: '王大锤',
-                subtitle: '我是王大锤',
-                state: i % 2 == 0 ? 1 : (i % 3 == 0 ? 2 : 3)
-            })
-        }
+        let listData = this.props.userListRcs.rows || [];
         return (
             <View style={{flex: 1, flexDirection: 'column'}}>
                 <CommonTitleBar nav={this.props.navigation} title={"新的朋友"}/>
                 <View style={styles.searchView}>
                     <View style={styles.searchEditText}>
                         <Image style={styles.searchImg} source={require('../images/ic_search_gray.png')} />
-                        <TextInput style={styles.searchInput} underlineColorAndroid="transparent" placeholder="微信号/QQ号/手机号" />
+                        <TextInput style={styles.searchInput}  onChangeText={this.doSearch.bind(this)} underlineColorAndroid="transparent" placeholder="微信号/QQ号/手机号" />
                     </View>
                     <View style={styles.searchLine}></View>
                 </View>
@@ -56,25 +52,33 @@ export default class NewFriendsScreen extends Component {
             </View>
         );
     }
-    renderItem = (item) => {
+    renderItem = (data) => {
+        let dataItem = data.item;
         return (
-            <View key={"list-item-" + item.item.key} style={listItem.container}>
+            <View key={"list-item-" + dataItem.id} style={listItem.container}>
                 <Image style={listItem.avatar} source={require('../images/avatar.png')} />
                 <View style={listItem.titleContainer}>
-                    <Text style={listItem.title}>{item.item.title}</Text>
-                    <Text style={listItem.subtitle}>{item.item.subtitle}</Text>
+                    <Text style={listItem.title}>{dataItem.nickName}</Text>
+                    <Text style={listItem.subtitle}>{}</Text>
                 </View>
                 <View style={listItem.btnContainer}>
-                    {
-                        item.item.state == 1 ? (
-                                <Button title="接受" color="#19AD17" onPress={()=>{}} />
-                            ) : (
-                                <Text>已添加</Text>
-                            )
-                    }
+                    <Button title="加为好友" color="#19AD17" onPress={this.addFriend.bind(this,dataItem)} />
                 </View>
             </View>
         );
+    };
+    doSearch(keyWords){
+        if(keyWords){
+            this.props.actions.doQueryUserList({pageSize:10,pageNum:1,keyWords});
+        }else{
+            this.props.actions.doCleanUserList();
+        }
+    }
+    async addFriend(dataItem){
+       const result = await this.props.actions.doAddFriend({acceptUser:dataItem.userId});
+       if(result){
+           alert('请求发送成功！');
+       }
     }
 }
 

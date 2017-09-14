@@ -30,6 +30,9 @@ export default class ChattingScreen extends Component {
     }
   }
   render() {
+    const  contactUserId = this.props.navigation.state.params.contactUserId;
+    console.log(contactUserId);
+
     var listData = [];
     var msg = '测试测试测测试测试测asdf';
     for (var i = 0; i < 20; i++) {
@@ -85,6 +88,8 @@ export default class ChattingScreen extends Component {
   }
 
   componentDidMount() {
+
+
   }
 
   updateView = (emoji, more) => {

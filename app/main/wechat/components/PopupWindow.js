@@ -10,6 +10,7 @@ import {
     Dimensions,
     ToastAndroid,
     PixelRatio,
+    Platform
 } from 'react-native'
 const { width, height } = Dimensions.get('window');
 import {mockData} from '../../../base/utils';
@@ -17,18 +18,18 @@ const global = mockData.global;
 let mwidth = 140;
 let mheight = 200;
 const bgColor = global.titleBackgroundColor;
-const top = 50;
-let dataArray;
+const top = (Platform.OS == 'ios'?70:50); // ios 70 安卓50
+
 export default class MenuModal extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             isVisible: this.props.show,
-        }
+        };
         mwidth = this.props.width;
         mheight = this.props.height;
-        dataArray = this.props.dataArray;
+
     }
 
     componentWillReceiveProps(nextProps) {
@@ -43,17 +44,6 @@ export default class MenuModal extends React.Component {
     }
 
     render() {
-        var menuItems = [];
-        var icons = this.props.menuIcons;
-        var texts = this.props.menuTexts;
-        for (var i = 0; i < icons.length; i++) {
-          menuItems.push(
-            <TouchableOpacity key={i} activeOpacity={0.3} onPress={this.handlePopMenuItemClick} style={styles.itemView}>
-                <Image style={styles.imgStyle} source={icons[i]} />
-                <Text style={styles.textStyle}>{texts[i]}</Text>
-            </TouchableOpacity>
-          );
-        }
         return (
             <View style={styles.container}>
                 <Modal
@@ -63,7 +53,17 @@ export default class MenuModal extends React.Component {
                     onRequestClose={() => this.closeModal()}>
                     <TouchableOpacity style={styles.container} onPress={() => this.closeModal()}>
                         <View style={styles.modal}>
-                            {menuItems}
+                            {
+                                this.props.menuData &&
+                                this.props.menuData.map((item,index)=>{
+                                    return(
+                                        <TouchableOpacity key={index} activeOpacity={0.3} onPress={this.handlePopMenuItemClick.bind(this,item)} style={styles.itemView}>
+                                            <Image style={styles.imgStyle} source={item.icon} />
+                                            <Text style={styles.textStyle}>{item.text}</Text>
+                                        </TouchableOpacity>
+                                    )
+                                })
+                            }
                         </View>
                     </TouchableOpacity>
                 </Modal>
@@ -71,8 +71,8 @@ export default class MenuModal extends React.Component {
         )
     }
 
-    handlePopMenuItemClick = () => {
-      ToastAndroid.show("click item", ToastAndroid.SHORT);
+    handlePopMenuItemClick (item) {
+      item.handleClick && item.handleClick();
       this.closeModal();
     }
 }

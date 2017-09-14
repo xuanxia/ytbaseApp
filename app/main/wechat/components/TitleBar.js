@@ -19,6 +19,35 @@ export default class TitleBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      menuList:[
+          {
+            text:'发起群聊',
+            icon:require('../images/ic_pop_group_chat.png'),
+            handleClick:()=>{}
+          },
+          {
+              text:'添加朋友',
+              icon:require('../images/ic_pop_add_friends.png'),
+              handleClick:function () {
+                  props.nav.navigate('NewFriends');
+              }
+          },
+          {
+              text:'扫一扫',
+              icon:require('../images/ic_pop_scan.png'),
+              handleClick:()=>{}
+          },
+          {
+              text:'收付款',
+              icon:require('../images/ic_pop_pay.png'),
+              handleClick:()=>{}
+          },
+          {
+              text:'帮助与反馈',
+              icon:require('../images/ic_pop_help.png'),
+              handleClick:()=>{}
+          }
+          ],
       showPop: false,
     }
   }
@@ -29,27 +58,25 @@ export default class TitleBar extends Component {
           <Text style={styles.title}>微信</Text>
         </View>
         <View style={styles.titleBarButtonContainer}>
-          <TouchableOpacity activeOpacity={0.5} onPress={this.handleSearchClick}>
+          <TouchableOpacity activeOpacity={0.5} onPress={this.handleSearchClick.bind(this)}>
             <Image
               source={require('../images/ic_search.png')}
               style={styles.titleBarImg}
             />
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.5} onPress={this.handleAddClick}>
+          <TouchableOpacity activeOpacity={0.5} onPress={this.handleAddClick.bind(this)}>
             <Image
               source={require('../images/ic_add.png')}
               style={styles.titleBarImg}
             />
           </TouchableOpacity>
-          <View style={{ position: 'absolute', top: 0, left: 0, width: width, height: height }}>
+          <View style={{ position: 'absolute', top: 70, left: 0, width: width, height: height }}>
             <MenuPopWindow
               width={140}
               height={200}
               show={this.state.showPop}
               closeModal={(show) => { this.setState({ showPop: show }) }}
-              menuIcons={[require('../images/ic_pop_group_chat.png'), require('../images/ic_pop_add_friends.png'), require('../images/ic_pop_scan.png'),
-                           require('../images/ic_pop_pay.png'), require('../images/ic_pop_help.png')]}
-              menuTexts={['发起群聊', '添加朋友', '扫一扫', '收付款', '帮助与反馈']}
+              menuData={this.state.menuList }
               />
           </View>
         </View>
@@ -57,12 +84,16 @@ export default class TitleBar extends Component {
     );
   }
 
-  handleSearchClick = () => {
+    componentWillUnmount(){
+        this.setState({showPop:false});
+    }
+
+  handleSearchClick  () {
     // 跳转到SearchScreen界面
     this.props.nav.navigate('Search');
   };
 
-  handleAddClick = () => {
+  handleAddClick  ()  {
     this.setState({showPop: !this.state.showPop});
   }
 
@@ -133,7 +164,8 @@ const styles = StyleSheet.create({
      width: width,
      height: 50,
      backgroundColor: global.titleBackgroundColor,
-     marginTop:  (Platform.OS ==='ios'?20:0)
+     marginTop:  (Platform.OS ==='ios'?20:0),
+     zIndex:99
   },
   titleBarTextContainer: {
     flex: 1,

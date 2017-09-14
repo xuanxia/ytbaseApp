@@ -16,7 +16,8 @@ import {
     FlatList,
     TouchableHighlight,
     AsyncStorage,
-    Platform
+    Platform,
+    DeviceEventEmitter
 } from 'react-native';
 
 const { width } = Dimensions.get('window');
@@ -47,13 +48,16 @@ export default class HomeScreen extends Component {
         },
     };
    async componentWillMount(){
-
-       this.props.navigation.navigate('NewFriends');
-
-        let userInfoStr = await AsyncStorage.getItem('USER-INFO');
-        if(!userInfoStr){
-            this.props.navigation.navigate('Login');
-        }
+        DeviceEventEmitter.addListener('goLoginPage', ()=>{
+           this.props.navigation.navigate('Login');
+       });
+       //
+       // this.props.navigation.navigate('NewFriends');
+       //
+       //  let userInfoStr = await AsyncStorage.getItem('USER-INFO');
+       //  if(!userInfoStr){
+       //      this.props.navigation.navigate('Login');
+       //  }
     }
 
     render() {
@@ -114,7 +118,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#FFFFFF',
     },
     listItemContainer: {
         flexDirection: 'row',

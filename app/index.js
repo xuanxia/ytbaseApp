@@ -6,26 +6,17 @@ import {
     StyleSheet,
     Text,
     View,
-    AppRegistry
+    AppRegistry,
+    DeviceEventEmitter
 } from 'react-native';
 import connectComponent from './base/utils/connect'
 import { StackNavigator,TabNavigator } from 'react-navigation';
 import routes from './main/wechat/router';
-/*======*/
-import HomeScreen from './main/wechat/container/HomeScreen';
-import ContactsScreen from './main/wechat/container/ContactsScreen.js';
-import FindScreen from './main/wechat/container/FindScreen.js';
-import MeScreen from './main/wechat/container/MeScreen.js';
-
-/*======*/
-
 const AppTabNavigator = TabNavigator({
-    /*index: { screen: routes.MainIndex.screen },
-    login: { screen: routes.NodeClubLogin.screen},*/
-    Home: { screen: HomeScreen },
-    Contacts: { screen: ContactsScreen },
-    Find: { screen: FindScreen },
-    Me: { screen: MeScreen }
+    Home: { screen: routes.HomeScreen.screen },
+    Contacts: { screen: routes.ContactsScreen.screen },
+    Find: { screen: routes.FindScreen.screen },
+    Me: { screen: routes.MeScreen.screen }
 },{
    // tabBarLabel:'Contacts',
     tabBarPosition:"bottom",
@@ -56,10 +47,19 @@ const IndexNavigator = StackNavigator(Object.assign({},
     headerMode: 'none', // 此参数设置不渲染顶部的导航条
 });
 class App extends Component {
+    constructor(props){
+        super(props);
+    }
+    componentWillMount(){
+
+    }
     render() {
         return (
             <IndexNavigator></IndexNavigator>
         );
+    }
+    componentWillUnmount(){
+      //  this.event_1.remove();
     }
 }
 export  default connectComponent(App);

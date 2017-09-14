@@ -20,19 +20,28 @@ import {mockData} from '../../../base/utils';
 const global = mockData.global;
 
 export default class ContactDetailScreen extends Component {
+  constructor(props){
+    super(props);
+  }
+
+  goSendMessage(contactUserId){
+      this.props.navigation.navigate('Chatting', {contactUserId})
+  }
+  componentWillMount(){
+        //TODO 后期通过接口获取详情数据
+    }
   render() {
-    console.log('params: ');
-    console.log(this.props.navigation.state.params);
+    const  contactParams = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-        <CommonTitleBar nav={this.props.navigation} title={this.props.navigation.state.params.title}/>
+        <CommonTitleBar nav={this.props.navigation} title={contactParams.title}/>
         <ScrollView>
           <View style={styles.content}>
             <View style={styles.contactInfoContainer}>
-              <Image style={styles.avatar} source={this.props.navigation.state.params.data.icon} />
+              <Image style={styles.avatar} source={contactParams.data.icon} />
               <View style={styles.contactInfoTextContainer}>
-                <Text style={styles.contactNameText}>{this.props.navigation.state.params.data.title}</Text>
-                <Text style={styles.conatactNickNameText}>{"昵称：" + this.props.navigation.state.params.data.title}</Text>
+                <Text style={styles.contactNameText}>{contactParams.data.title}</Text>
+                <Text style={styles.conatactNickNameText}>{"昵称：" + contactParams.data.title}</Text>
               </View>
             </View>
             <View style={styles.markContainer}>
@@ -55,7 +64,7 @@ export default class ContactDetailScreen extends Component {
                 <Text style={[styles.commonFontStyle]}>更多</Text>
               </View>
             </View>
-            <TouchableOpacity activeOpacity={0.5}>
+            <TouchableOpacity activeOpacity={0.5} onPress={this.goSendMessage.bind(this,contactParams.data.userId)}>
               <View style={styles.positiveBtn}>
                 <Text style={styles.positiveBtnText}>发消息</Text>
               </View>
