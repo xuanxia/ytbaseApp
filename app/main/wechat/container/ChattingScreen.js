@@ -30,9 +30,6 @@ export default class ChattingScreen extends Component {
     }
   }
   render() {
-    const  contactUserId = this.props.navigation.state.params.contactUserId;
-    console.log(contactUserId);
-
     var listData = [];
     var msg = '测试测试测测试测试测asdf';
     for (var i = 0; i < 20; i++) {
@@ -87,8 +84,10 @@ export default class ChattingScreen extends Component {
     );
   }
 
-  componentDidMount() {
-
+ async componentDidMount() {
+      const  contactUserId = this.props.navigation.state.params.contactUserId;
+      await this.props.actions.SendMessage(contactUserId,{a:1,b:2});
+      await this.props.actions.doGetLocMesssageList(contactUserId);
 
   }
 
@@ -97,8 +96,7 @@ export default class ChattingScreen extends Component {
       showEmojiView: emoji,
       showMoreView: more,
     })
-  }
-
+  };
   // 当str长度超过某个限定值时，在str中插入换行符
   spliceStr(str) {
     var len = str.length;

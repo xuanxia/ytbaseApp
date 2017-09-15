@@ -20,7 +20,10 @@ const routes = {
     Register:{screen:connectScreen(RegisterScreen,{actions:['doRegister'],storeRcs:['userRcs']})},
     Search:{screen:connectScreen(SearchScreen)},
     ContactDetail:{screen:connectScreen(ContactDetailScreen)},
-    Chatting:{screen:connectScreen(ChattingScreen)},
+    Chatting:{screen:connectScreen(ChattingScreen,{
+        actions:['doSendMessage','doReceiveMessage','doGetLocMessageList','doGetLocChatterList'],
+        storeRcs:['chatContactListRcs','chatMessageListRcs']
+    })},
     Moment:{screen:connectScreen(MomentScreen)},
     ScanResult:{screen:connectScreen(ScanResultScreen)},
     NewFriends:{screen:connectScreen(NewFriendsScreen)},

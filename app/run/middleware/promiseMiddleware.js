@@ -6,6 +6,7 @@ import {HTTP_SERVICE_KEY,httpDomain} from '../config';
 import {dealParams} from '../../base/utils';
 const baseUrl = httpDomain[HTTP_SERVICE_KEY]['dataServer'];
 import {AsyncStorage} from 'react-native';
+import {locUtil} from '../../base/utils';
 export default store => next => async action =>{
     const {
         params={},
@@ -16,13 +17,24 @@ export default store => next => async action =>{
         next(action);
         return;
     }
+
+    //对本地数据处理的action
+    if(params.url.split(0,13) == 'localStage://'){
+        const resData = await locUtil(params).catch((error)=>{
+            //TODO 错误处理
+            console.log(error);
+            return
+        });
+        if(result){
+            next({resData,params})
+        }
+    }
    const {url,requestBody} = await getAjaxPrams(params);
    return new Promise((resolve, reject)=>{
-        console.log(requestBody);
         fetch(url,requestBody)
             .then(async (response)=>{
                     const resData = await response.json();
-                    console.log(resData);
+                    //console.log(resData);
                     return {
                         headers: response.headers.map,
                         resData

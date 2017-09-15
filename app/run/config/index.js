@@ -20,7 +20,8 @@ const httpDomain = {
 
     },
     test: {
-        dataServer:'http://127.0.0.1:7001'
+        dataServer:'http://127.0.0.1:7001',
+        socketServe:'http://127.0.0.1:7001'
     }
 };
 

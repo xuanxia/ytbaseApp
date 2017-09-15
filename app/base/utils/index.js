@@ -9,6 +9,7 @@ import connectScreen from './connectScreen';
 import pinyinUtil from  './pinyinUtil';
 import mockData from './mockData';
 import utils from './utils';
+import locUtil from './locUtil';
 export {
     connectStore,
     connectComponent,
@@ -16,5 +17,6 @@ export {
     connectScreen,
     pinyinUtil,
     mockData,
-    utils
+    utils,
+    locUtil
 }

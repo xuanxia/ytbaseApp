@@ -15,6 +15,20 @@ export const DEL_FRIEND  = 'DEL_FRIEND';// 删除好友
 export const QUERY_CONTACT_LIST  = 'QUERY_CONTACT_LIST';// 查询联系人列表
 
 
+//====聊天相关
+export const SEND_MESSAG  = 'SEND_MESSAG';// 发送消息
+export const RECEIVE_MESSAG  = 'RECEIVE_MESSAG';// 接收消息
+export const GET_LOCAL_MESSAGE_LIST  = 'GET_LOCAL_MESSAGE_LIST';//获取聊天记录列表
+export const GET_LOCAL_CHATER_LIST = 'GET_LOCAL_CHATER_LIST'; //获取本地聊天的联系人列表
+
+
+
+
+
+
+
+
+
 
 
 
