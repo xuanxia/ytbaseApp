@@ -3,7 +3,8 @@
  */
 
 import {AsyncStorage} from 'react-native';
-export default async function (params) {
+import {utils} from './';
+async function delLocalData (params) {
     const method = params.url.substr(13,params.url.length);
     const locUtil = new LocUtil();
     return await locUtil[method](params)
@@ -22,7 +23,12 @@ class LocUtil {
         const  {key} = params;
         //TODO 类型校验
         const result = await AsyncStorage.getItem(key);
-        return JSON.parse(result);
+        if(result){
+            return JSON.parse(result);
+        }else{
+            return [];
+        }
+
     }
     async set(params){
         const  {key,body} = params;
@@ -37,14 +43,14 @@ class LocUtil {
     //key保存的是一个数组 往这个数组中push一项
     async setArrItem(params){
         const  {key,body} = params;
+        //AsyncStorage.removeItem(key);
         const temp = await AsyncStorage.getItem(key);
         let Arr = [];
         if(temp){
             Arr = JSON.parse(temp);
-        }else{
-            return Arr;
         }
         //TODO 根据opt 可以自定义插入位置
+        body.id = utils.getuuid(8,10);
         Arr.push(body);
         await AsyncStorage.setItem(key,JSON.stringify(Arr));
         return Arr;
@@ -69,15 +75,16 @@ class LocUtil {
     }
 }
 
-Array.prototype.indexOf = function(key,val) {
-    for (let i = 0; i < this.length; i++) {
-        if (this[i][key] == val) return i;
-    }
-    return -1;
-};
-Array.prototype.remove = function(key,val) {
-    let index = this.indexOf(key,val);
-    if (index > -1) {
-        this.splice(index, 1);
-    }
-};
+// Array.prototype.indexOf = function(key,val) {
+//     for (let i = 0; i < this.length; i++) {
+//         if (this[i][key] == val) return i;
+//     }
+//     return -1;
+// };
+// Array.prototype.remove = function(key,val) {
+//     let index = this.indexOf(key,val);
+//     if (index > -1) {
+//         this.splice(index, 1);
+//     }
+// };
+export default delLocalData;

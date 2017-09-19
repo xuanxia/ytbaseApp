@@ -48,6 +48,7 @@ export default class HomeScreen extends Component {
         },
     };
    async componentWillMount(){
+        //this.props.navigation.navigate('Login');
         DeviceEventEmitter.addListener('goLoginPage', ()=>{
            this.props.navigation.navigate('Login');
        });

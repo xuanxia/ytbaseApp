@@ -1,4 +1,7 @@
 /**
+ * Created by kangxiaojian on 2017/9/18.
+ */
+/**
  * Created by kangxiaojian on 2017/9/4.
  */
 import React, { Component } from 'react';
@@ -18,41 +21,46 @@ export default class LoginScreen extends Component {
     constructor(props){
         super(props);
         this.state = {
-            account:'',
-            password:''
+            nickName:'',
+            avatar:'https://staticonline.hipac.cn/item/201606/06301713172785.jpeg@200w',
+            sex:1,
+            phone:'',
         };
     }
-    async doLogin(){
-        //this.props.navigation.goBack();
-        const  res = await this.props.actions.doLogin(this.state);
-        if(res && res.data &&res.data.userId){
-            AsyncStorage.setItem('TOKEN',res.data.userId);
-           this.props.navigation.navigate('Home');
+    async doSubmit(){
+        const  res = await this.props.actions.doAddUserProfile(this.state);
+        if(res && res.data &&res.data.id){
+            this.props.navigation.navigate('Home');
         }
-     }
-    doGoRegister(){
-        this.props.navigation.navigate('Register');
-    }
-    componentWillMount(){
-        AsyncStorage.setItem('TOKEN','');
     }
     render() {
         return (
             <View style={styles.container}>
                 <View>
                     <Text>
-                        用户名：
+                        昵称：
                     </Text>
                     <TextInput
                         style={{height: 40, borderColor: 'gray', borderWidth: 1,width:width/(1.5)}}
                         onChangeText={(text) => this.setState({
-                            account:text
+                            nickName:text
                         })}
                     />
                 </View>
                 <View style={{marginTop:20}}>
                     <Text>
-                        密码：
+                        手机：
+                    </Text>
+                    <TextInput
+                        style={{height: 40, borderColor: 'gray', borderWidth: 1,width:width/(1.55)}}
+                        onChangeText={(text) => this.setState({
+                            phone:text
+                        })}
+                    />
+                </View>
+                <View style={{marginTop:20}}>
+                    <Text>
+                        头像：
                     </Text>
                     <TextInput
                         style={{height: 40, borderColor: 'gray', borderWidth: 1,width:width/(1.55)}}
@@ -61,11 +69,8 @@ export default class LoginScreen extends Component {
                         })}
                     />
                 </View>
-                <TouchableOpacity onPress={this.doGoRegister.bind(this)}>
-                    <Text style={{marginTop:20,textAlign:'center'}}>-----------  立即注册  ----------</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={this.doLogin.bind(this)}>
-                    <Text style={{marginTop:20,width:100,height:40,borderWidth:1,lineHeight:40,textAlign:'center'}}>立即登录</Text>
+                <TouchableOpacity onPress={this.doSubmit.bind(this)}>
+                    <Text style={{marginTop:20,width:100,height:40,borderWidth:1,lineHeight:40,textAlign:'center'}}>立即提交</Text>
                 </TouchableOpacity>
 
             </View>

@@ -26,10 +26,22 @@ var { width, height} = Dimensions.get('window');
 export default class NewFriendsScreen extends Component {
     constructor(props){
         super(props);
-
+        this.state={
+            isFriendRequire:true
+        }
+    }
+   async componentWillMount(){
+        //好友申请
+       await this.props.actions.doQueryContact({type:0});
     }
     render() {
-        let listData = this.props.userListRcs.rows || [];
+        let listData = [];
+        if(this.props.userListRcs.rows && this.props.userListRcs.rows.length){
+            this.state.isFriendRequire = false;
+            listData = this.props.userListRcs.rows;
+        }else{
+            listData = this.props.contactListRcs.rows ||[];
+        }
         return (
             <View style={{flex: 1, flexDirection: 'column'}}>
                 <CommonTitleBar nav={this.props.navigation} title={"新的朋友"}/>
@@ -56,20 +68,30 @@ export default class NewFriendsScreen extends Component {
         let dataItem = data.item;
         return (
             <View key={"list-item-" + dataItem.id} style={listItem.container}>
-                <Image style={listItem.avatar} source={require('../images/avatar.png')} />
+                <Image style={listItem.avatar} source={{uri:dataItem.avatar}} />
                 <View style={listItem.titleContainer}>
                     <Text style={listItem.title}>{dataItem.nickName}</Text>
                     <Text style={listItem.subtitle}>{}</Text>
                 </View>
                 <View style={listItem.btnContainer}>
-                    <Button title="加为好友" color="#19AD17" onPress={this.addFriend.bind(this,dataItem)} />
+                    {
+                        this.renderButton(dataItem)
+                    }
+
                 </View>
             </View>
         );
     };
+    renderButton(dataItem){
+        if(this.state.isFriendRequire){
+            return (<Button title="接受申请" color="#19AD17" onPress={this.AcceptFriend.bind(this,dataItem)} />) ;
+        }else{
+            return (<Button title="加为好友" color="#19AD17" onPress={this.addFriend.bind(this,dataItem)} />) ;
+        }
+    }
     doSearch(keyWords){
         if(keyWords){
-            this.props.actions.doQueryUserList({pageSize:10,pageNum:1,keyWords});
+            this.props.actions.doQueryUserList({pageSize:30,pageNum:1,keyWords});
         }else{
             this.props.actions.doCleanUserList();
         }
@@ -79,6 +101,12 @@ export default class NewFriendsScreen extends Component {
        if(result){
            alert('请求发送成功！');
        }
+    }
+    async AcceptFriend(dataItem){
+        const result = await this.props.actions.doAcceptFriend({id:dataItem.id});
+        if(result){
+            alert('请求发送成功！');
+        }
     }
 }
 

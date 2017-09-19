@@ -37,7 +37,7 @@ export default class ContactsScreen extends Component {
     super(props);
   }
    componentWillMount(){
-      this.props.actions.doQueryContact();
+      this.props.actions.doQueryContact({type:1});
   }
   render() {
       const contacts = this.props.contactListRcs.rows || [];

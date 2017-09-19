@@ -11,7 +11,8 @@ import {
   Button,
   PixelRatio,
   ScrollView,
-  ToastAndroid,
+  TouchableOpacity,
+    AsyncStorage
 } from 'react-native';
 
 const { width} = Dimensions.get('window');
@@ -32,21 +33,29 @@ export default class MeScreen extends Component {
       );
     },
   };
+    async componentWillMount(){
+      const userId = await AsyncStorage.getItem('TOKEN');
+      await this.props.actions.doGetUserProfile({userId})
+    }
+
 
   render() {
+      const userProfile = this.props.userProfileRcs || {};
     return (
       <View style={styles.container}>
         <TitleBar nav={this.props.navigation}/>
         <View style={styles.divider}></View>
         <ScrollView style={styles.content}>
-          <View style={styles.meInfoContainer}>
-            <Image style={styles.meInfoAvatar} source={require('../images/avatar.png')} />
-            <View style={styles.meInfoTextContainer}>
-              <Text style={styles.meInfoNickName}>yubo</Text>
-              <Text style={styles.meInfoWeChatId}>微信号：大王叫我来巡山</Text>
+          <TouchableOpacity onPress={()=>{this.props.navigation.navigate('UserProfile')}}>
+            <View style={styles.meInfoContainer}>
+                <Image style={styles.meInfoAvatar} source={{uri:userProfile.avatar}} />
+                <View style={styles.meInfoTextContainer}>
+                  <Text style={styles.meInfoNickName}>{userProfile.nickName}</Text>
+                  <Text style={styles.meInfoWeChatId}>手机号：{userProfile.phone}</Text>
+                </View>
+                <Image style={styles.meInfoQRCode} source={require('../images/ic_qr_code.png')} />
             </View>
-            <Image style={styles.meInfoQRCode} source={require('../images/ic_qr_code.png')} />
-          </View>
+          </TouchableOpacity>
           <View />
           <View style={{width: width, height: 20}} />
           <ListItem icon={require('../images/ic_wallet.png')} text={"钱包"} />
@@ -59,12 +68,19 @@ export default class MeScreen extends Component {
           <ListItemDivider />
           <ListItem icon={require('../images/ic_emoji.png')} text={"表情"} />
           <View style={{width: width, height: 20}} />
-          <ListItem icon={require('../images/ic_settings.png')} text={"设置"} />
+          <ListItem icon={require('../images/ic_settings.png')} text={"设置"} handleClick={this.logout.bind(this)} />
           <View style={{width: width, height: 20}} />
         </ScrollView>
         <View style={styles.divider}></View>
       </View>
     );
+  }
+  async logout(){
+      const  res = await this.props.actions.doLogout();
+      if(res){
+           AsyncStorage.setItem('TOKEN','');
+           this.props.navigation.navigate('Login');
+      }
   }
 }
 

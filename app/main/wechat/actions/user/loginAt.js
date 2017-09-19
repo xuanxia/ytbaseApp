@@ -12,6 +12,18 @@ function Login(body) {
         }
     }
 }
+function Logout() {
+    return {
+        type:types.LOGOUT,
+        params:{
+            url:'/api/user.logout',
+            load:true
+        }
+    }
+}
+
 export const doLogin = (getData)=> (dispatch, getState) => dispatch(Login( getData));
+export const doLogout = ()=> (dispatch, getState) => dispatch(Logout());
+
 
 

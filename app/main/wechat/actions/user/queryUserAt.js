@@ -2,17 +2,17 @@
  * Created by kangxiaojian on 2017/9/6.
  */
 import * as types from '../actionTypes';
-function QueryUserList(type,body,load=true) {
+function QueryUserList(type,body,load=false) {
     return {
         type,
         params:{
             url:'/api/user.query_list',
             body,
-            load
+            load,
+            loadingText:'正在努力查找中...'
         }
     }
 }
-
 function CleanUserList() {
     return {
         type:types.CLEAN_QUERY_USER_LIST,

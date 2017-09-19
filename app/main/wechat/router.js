@@ -9,7 +9,8 @@ import ScanResultScreen from './container/ScanResultScreen.js';
 import LoginScreen from './container/LoginScreen';
 import RegisterScreen from './container/RegisterScreen';
 import NewFriendsScreen from './container/NewFriendsScreen';
-//以下4个为底部tab路由 加在这里方便调转调用
+import UserProfileScreen from './container/UserProfileScreen';
+//以下4个为底部tab路由 加在这里方便调用
 import HomeScreen from './container/HomeScreen';
 import ContactsScreen from './container/ContactsScreen.js';
 import FindScreen from './container/FindScreen.js';
@@ -21,8 +22,12 @@ const routes = {
     Search:{screen:connectScreen(SearchScreen)},
     ContactDetail:{screen:connectScreen(ContactDetailScreen)},
     Chatting:{screen:connectScreen(ChattingScreen,{
-        actions:['doSendMessage','doReceiveMessage','doGetLocMessageList','doGetLocChatterList'],
-        storeRcs:['chatContactListRcs','chatMessageListRcs']
+        actions:['doSendMessage','doReceiveMessage','doGetLocMessageList','doGetLocChatterList',],
+        storeRcs:['chatContactListRcs','chatMessageListRcs','userProfileRcs']
+    })},
+    UserProfile:{screen:connectScreen(UserProfileScreen,{
+        actions:['doAddUserProfile'],
+        storeRcs:['userProfileRcs']
     })},
     Moment:{screen:connectScreen(MomentScreen)},
     ScanResult:{screen:connectScreen(ScanResultScreen)},
@@ -32,7 +37,10 @@ const routes = {
     HomeScreen:{screen:connectScreen(HomeScreen)},
     ContactsScreen:{screen:connectScreen(ContactsScreen)},
     FindScreen:{screen:connectScreen(FindScreen)},
-    MeScreen:{screen:connectScreen(MeScreen)},
+    MeScreen:{screen:connectScreen(MeScreen,{
+        actions:['doGetUserProfile','doLogout'],
+        storeRcs:['userProfileRcs']
+    })},
 };
 
 export default routes;

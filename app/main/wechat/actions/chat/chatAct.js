@@ -25,7 +25,7 @@ function ReceiveMessage(key,body) {
 }
 function GetLocMessageList(key) {
     return {
-        type:types.RECEIVE_MESSAG,
+        type:types.GET_LOCAL_MESSAGE_LIST,
         params:{
             url:'localStage://getList',
             key,

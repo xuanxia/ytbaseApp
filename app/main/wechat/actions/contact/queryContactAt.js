@@ -8,7 +8,7 @@ function QueryContact(body) {
         params:{
             url:'/api/contact.list',
             body,
-            load:true
+            load:false
         }
     }
 }

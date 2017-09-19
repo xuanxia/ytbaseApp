@@ -16,7 +16,7 @@ function AcceptFriend(body) {
     return {
         type:types.ACCEPT_FRIEND,
         params:{
-            url:'/api/relation.add_friend',
+            url:'/api/relation.accept_friend',
             body,
             load:true
         }
@@ -26,7 +26,7 @@ function DelFriend(body) {
     return {
         type:types.DEL_FRIEND,
         params:{
-            url:'/api/relation.add_friend',
+            url:'/api/relation.del_friend',
             body,
             load:true
         }

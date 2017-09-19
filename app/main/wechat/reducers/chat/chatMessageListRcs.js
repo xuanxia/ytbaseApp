@@ -20,6 +20,9 @@ const initMessages = fromJS(
          }*/
     ]);
 export default  createReducer(initMessages,{
+    [types.SEND_MESSAG]:(state,action)=>{
+        return state.merge(action.resData);
+    },
     [types.GET_LOCAL_MESSAGE_LIST]:(state,action)=>{
         return state.merge(action.resData);
     },

@@ -1,10 +1,10 @@
-import userRcs from './user/userRcs';
+import userProfileRcs from './user/userProfileRcs';
 import userListRcs from './user/userListRcs';
 import contactListRcs from './contact/contactListRcs';
 import chatContactListRcs from './chat/chatContactListRcs';
 import chatMessageListRcs from './chat/chatMessageListRcs';
 export {
-    userRcs,
+    userProfileRcs,
     userListRcs,
     contactListRcs,
     chatContactListRcs,

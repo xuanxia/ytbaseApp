@@ -4,20 +4,24 @@
 import { createReducer } from 'redux-immutablejs';
 import {fromJS} from 'immutable'
 import * as types from '../../actions/actionTypes';
-const userInfoData = fromJS({
+const initUserProfileList = fromJS({
    count:0,
    rows:[
        /* {
-           id:'',
-           account:'',
-           password:'',
-           createdAt:'',
-           updatedAt:''
-       }*/
+        id:'',
+        userId:''
+        nickName:'',
+        avatar:'',
+        sex:1,
+        phone:'',
+        timeLineTopPic:''
+        createdAt:'',
+        updatedAt:''
+        }*/
    ]
 });
 
-export default  createReducer(userInfoData,{
+export default  createReducer(initUserProfileList,{
     [types.QUERY_USER_LIST]:(state,action)=>{
         //这里（包括其他所有的接口）不对是否有resData做校验 统一在promiseMiddleware中处理
         return state.merge(action.resData.data);

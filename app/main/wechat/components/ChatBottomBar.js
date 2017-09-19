@@ -24,10 +24,11 @@ export default class ChatBottomBar extends Component {
       barState: BAR_STATE_SHOW_KEYBOARD,
       showEmojiView: false,
       showMoreView: false,
+      showSend:false,
     };
   }
   render() {
-    var barState = this.state.barState;
+    const barState = this.state.barState;
     switch (barState) {
       case BAR_STATE_SHOW_KEYBOARD:
         return this.renderKeyBoardView();
@@ -43,13 +44,18 @@ export default class ChatBottomBar extends Component {
         <TouchableOpacity activeOpacity={0.5} onPress={this.handlePress.bind(this, "soundBtn")}>
           <Image style={styles.icon} source={require('../images/ic_chat_sound.png')} />
         </TouchableOpacity>
-        <TextInput style={styles.input} />
+        <TextInput style={styles.input}  onChangeText={
+          (text)=>{
+            if(text){
+              this.setState({showSend:true});
+            }
+            this.props.onChangeTextHandle(text);
+          }
+        } />
         <TouchableOpacity activeOpacity={0.5} onPress={this.handlePress.bind(this, "emojiBtn")}>
           <Image style={styles.icon} source={require('../images/ic_chat_emoji.png')} />
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.5} onPress={this.handlePress.bind(this, "moreBtn")}>
-          <Image style={[styles.icon, {marginLeft: 10}]} source={require('../images/ic_chat_add.png')} />
-        </TouchableOpacity>
+          {this.renderSendButton()}
       </View>
     );
   }
@@ -65,12 +71,26 @@ export default class ChatBottomBar extends Component {
         <TouchableOpacity activeOpacity={0.5} onPress={this.handlePress.bind(this, "emojiBtn")}>
           <Image style={styles.icon} source={require('../images/ic_chat_emoji.png')} />
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.5} onPress={this.handlePress.bind(this, "moreBtn")}>
-          <Image style={[styles.icon, {marginLeft: 10}]} source={require('../images/ic_chat_add.png')} />
-        </TouchableOpacity>
+          {this.renderSendButton()}
       </View>
     );
   }
+
+  renderSendButton(){
+      if(this.state.showSend){
+        return (<TouchableOpacity onPress={()=>{this.props.sendMessageHandle()}}>
+                <Text style={{}}>发送</Text>
+        </TouchableOpacity>)
+      }else{
+        return(
+              <TouchableOpacity activeOpacity={0.5} onPress={this.handlePress.bind(this, "moreBtn")}>
+                <Image style={[styles.icon, {marginLeft: 10}]} source={require('../images/ic_chat_add.png')} />
+              </TouchableOpacity>
+            )
+      }
+  }
+
+
   handlePress = (tag) => {
     if ("soundBtn" == tag) {
       if (this.state.barState === BAR_STATE_SHOW_KEYBOARD) {
@@ -88,15 +108,14 @@ export default class ChatBottomBar extends Component {
       }
       this.props.updateView(false, false);
     } else if ("emojiBtn" == tag) {
-      var showEmojiView = this.state.showEmojiView;
+      const showEmojiView = this.state.showEmojiView;
       this.props.updateView(!showEmojiView, false);
       this.setState({
         showEmojiView: !showEmojiView,
         showMoreView: false,
       })
     } else if ("moreBtn" == tag) {
-      var showMoreView = this.state.showMoreView;
-      var showEmojiView = this.state.showEmojiView;
+      const showMoreView = this.state.showMoreView;
       this.props.updateView(false, !showMoreView);
       this.setState({
         showEmojiView: false,
