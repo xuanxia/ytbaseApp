@@ -55,7 +55,10 @@ export default store => next => async action =>{
             const {resData,headers} = response;
             //未登录处理
             if(resData.code ==='NO_LOGIN_ERROR'){
-                DeviceEventEmitter.emit('goLoginPage');
+                const isInLogingPage = store.getState().get('isInLoginPageRcs').toJS().flag;
+                if(!isInLogingPage){
+                    DeviceEventEmitter.emit('goLoginPage');
+                }
                 reject();
             }
             //TODO resData返回的错误统一处理

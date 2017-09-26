@@ -46,6 +46,7 @@ class ContentStore{
         port: 7878
     }){
         const enhancer = compose(
+
             applyMiddleware(...this._middlewares),
             devTools(devToolsConfig)
         );

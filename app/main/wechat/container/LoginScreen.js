@@ -26,7 +26,7 @@ export default class LoginScreen extends Component {
         //this.props.navigation.goBack();
         const  res = await this.props.actions.doLogin(this.state);
         if(res && res.data &&res.data.userId){
-            AsyncStorage.setItem('TOKEN',res.data.userId);
+            AsyncStorage.setItem('TOKEN',res.data.token);
            this.props.navigation.navigate('Home');
         }
      }
@@ -35,6 +35,10 @@ export default class LoginScreen extends Component {
     }
     componentWillMount(){
         AsyncStorage.setItem('TOKEN','');
+        this.props.actions.doChangeInLoginPageStatus({flag:true});
+    }
+    componentWillUnmount(){
+        this.props.actions.doChangeInLoginPageStatus({flag:false});
     }
     render() {
         return (

@@ -3,6 +3,7 @@
  */
 export const LOGIN = 'LOGIN';// 登录
 export const LOGOUT = 'LOGOUT';// 注销
+export const CHANGE_IN_LOGIN_PAGE = 'CHANGE_IN_LOGIN_PAGE';// 判断登录页
 
 export const REGISTER = 'REGISTER';// 注册
 export const QUERY_USER_BY_ID  = 'QUERY_USER_BY_ID';// 通过id查找用户

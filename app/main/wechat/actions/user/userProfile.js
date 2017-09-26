@@ -6,7 +6,7 @@ function AddUserProfile(body) {
     return {
         type:types.ADD_USER_PROFILE,
         params:{
-            url:'/api/user.add.user.profile',
+            url:'/api/user.add_user_profile',
             body,
             load:true
         }
@@ -16,7 +16,7 @@ function GetUserProfile(body) {
     return {
         type:types.GET_USER_PROFILE,
         params:{
-            url:'/api/user.get.user.profile',
+            url:'/api/user.get_user_profile',
             body,
             load:true
         }

@@ -13,9 +13,10 @@ import {
     Dimensions,
     TouchableOpacity,
     TextInput,
-    AsyncStorage
+    AsyncStorage,
+    Button
 } from 'react-native';
-
+import {utils} from '../../../base/utils';
 const { width} = Dimensions.get('window');
 export default class LoginScreen extends Component {
     constructor(props){
@@ -62,12 +63,7 @@ export default class LoginScreen extends Component {
                     <Text>
                         头像：
                     </Text>
-                    <TextInput
-                        style={{height: 40, borderColor: 'gray', borderWidth: 1,width:width/(1.55)}}
-                        onChangeText={(text) => this.setState({
-                            password:text
-                        })}
-                    />
+                    <Button onPress={this.uploadPic.bind(this)} title="上传头像"/>
                 </View>
                 <TouchableOpacity onPress={this.doSubmit.bind(this)}>
                     <Text style={{marginTop:20,width:100,height:40,borderWidth:1,lineHeight:40,textAlign:'center'}}>立即提交</Text>
@@ -75,6 +71,12 @@ export default class LoginScreen extends Component {
 
             </View>
         );
+    }
+
+    async uploadPic(){
+
+        const result  =  await utils.fileUpload();
+
     }
 }
 

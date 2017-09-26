@@ -37,7 +37,7 @@ export default class ChattingScreen extends Component {
         type:1,  // 1单发 2群发
         data:{
             type:1, // 1 字符数据 2 图片 3小视屏
-            news:'hello world'
+            news:''
         }
     }
   }
@@ -48,6 +48,9 @@ export default class ChattingScreen extends Component {
   }
   async sendMessage(){
     // local show message
+     if(!this.message.data.news){
+         return
+     }
      const localMessage = {
          type:1,
          data:this.message.data,
@@ -147,9 +150,7 @@ export default class ChattingScreen extends Component {
         );
     }
 
-  }
-
-
+  };
   spliceStr(str) {
         var len = str.length;
         if (len > MSG_LINE_MAX_COUNT) {

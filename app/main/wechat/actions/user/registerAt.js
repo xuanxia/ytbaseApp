@@ -6,7 +6,7 @@ function Register(body) {
     return {
         type:types.REGISTER,
         params:{
-            url:'/api/user.register',
+            url:'/api/ignore/user.register',
             body,
             load:true
         }

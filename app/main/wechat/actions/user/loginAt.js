@@ -6,7 +6,7 @@ function Login(body) {
     return {
         type:types.LOGIN,
         params:{
-            url:'/api/user.login',
+            url:'/api/ignore/user.login',
             body,
             load:true
         }

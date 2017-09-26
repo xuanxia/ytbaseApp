@@ -17,7 +17,7 @@ import FindScreen from './container/FindScreen.js';
 import MeScreen from './container/MeScreen.js';
 import {connectScreen} from '../../base/utils'
 const routes = {
-    Login:{screen:connectScreen(LoginScreen,{actions:['doLogin'],storeRcs:['userRcs']})},
+    Login:{screen:connectScreen(LoginScreen,{actions:['doLogin','doChangeInLoginPageStatus'],storeRcs:['userRcs','isInLoginPageRcs']})},
     Register:{screen:connectScreen(RegisterScreen,{actions:['doRegister'],storeRcs:['userRcs']})},
     Search:{screen:connectScreen(SearchScreen)},
     ContactDetail:{screen:connectScreen(ContactDetailScreen)},
